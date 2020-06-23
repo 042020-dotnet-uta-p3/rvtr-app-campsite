@@ -29,9 +29,9 @@ describe('AccountService', () => {
           account: {
             base: '',
             uri: {
-              account: 'test',
-              payment: null,
-              profile: null
+              account: 'accountTest',
+              payment: 'paymentTest',
+              profile: 'profileTest'
             }
           },
           booking: null,
@@ -64,18 +64,20 @@ describe('AccountService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should make httpDelete request', fakeAsync(() => {
-    let req: TestRequest;
+  describe('delete', () => {
+    it('should make httpDelete request', fakeAsync(() => {
+      let req: TestRequest;
 
-    service.delete('0').subscribe((res) => {
-      expect(JSON.parse(res.toString())).toBeTrue();
-    });
+      service.delete('0').subscribe((res) => {
+        expect(JSON.parse(res.toString())).toBeTrue();
+      });
 
-    tick();
+      tick();
 
-    req = httpTestingController.expectOne('test/0');
-    req.flush(JSON.stringify(true));
-  }));
+      req = httpTestingController.expectOne('accountTest/0');
+      req.flush(JSON.stringify(true));
+    }));
+  });
 
   describe('get', () => {
 
@@ -87,7 +89,7 @@ describe('AccountService', () => {
 
       tick();
 
-      req = httpTestingController.expectOne('test');
+      req = httpTestingController.expectOne('accountTest');
       req.flush(accountMock);
     }));
 
@@ -100,54 +102,87 @@ describe('AccountService', () => {
 
       tick();
 
-      reqOne = httpTestingController.expectOne('test?id=0');
+      reqOne = httpTestingController.expectOne('accountTest?id=0');
       reqOne.flush(accountMock);
     }));
   });
 
-  it('should make httpPost request', fakeAsync(() => {
-    let req: TestRequest;
+  describe('post', () => {
+    it('should make httpPost request', fakeAsync(() => {
+      let req: TestRequest;
 
-    service.post(accountMock[0]).subscribe((res) => {
-      expect(JSON.parse(res.toString())).toBeTrue();
+      service.post(accountMock[0]).subscribe((res) => {
+        expect(JSON.parse(res.toString())).toBeTrue();
+      });
+
+      tick();
+
+      req = httpTestingController.expectOne('accountTest');
+      req.flush(JSON.stringify(true));
+    }));
+  });
+
+  describe('put', () => {
+    it('should make httpPut request', fakeAsync(() => {
+      let req: TestRequest;
+
+      service.put(accountMock[0]).subscribe((res) => {
+        expect(res).toEqual(accountMock[0]);
+      });
+
+      tick();
+
+      req = httpTestingController.expectOne('accountTest');
+      req.flush(accountMock[0]);
+    }));
+  });
+
+  describe('deletePayment', () => {
+    it('should make httpDelete request', fakeAsync(() => {
+      let req: TestRequest;
+
+      service.deletePayment(0).subscribe((res) => {
+        expect(JSON.parse(res.toString())).toBeTrue();
+      });
+
+      tick();
+
+      req = httpTestingController.expectOne('paymentTest/0');
+      req.flush(JSON.stringify(true));
+    }));
+  });
+  
+  describe('deleteProfile', () => {
+    it('should make httpDelete request', fakeAsync(() => {
+      let req: TestRequest;
+
+      service.deleteProfile(0).subscribe((res) => {
+        expect(JSON.parse(res.toString())).toBeTrue();
+      });
+
+      tick();
+
+      req = httpTestingController.expectOne('profileTest/0');
+      req.flush(JSON.stringify(true));
+    }));
+  });
+
+  describe('isNullOrWhitespace', () => {
+    it('should return true on null string', () => {
+
+      expect(service.isNullOrWhitespace(null)).toBeTrue();
     });
+    it('should return true on empty string', () => {
 
-    tick();
-
-    req = httpTestingController.expectOne('test');
-    req.flush(JSON.stringify(true));
-  }));
-
-
-  it('should make httpPut request', fakeAsync(() => {
-    let req: TestRequest;
-
-    service.put(accountMock[0]).subscribe((res) => {
-      expect(res).toEqual(accountMock[0]);
+      expect(service.isNullOrWhitespace('')).toBeTrue();
     });
+    it('should return true on string of spaces string', () => {
 
-    tick();
+      expect(service.isNullOrWhitespace('  ')).toBeTrue();
+    });
+    it('should return false on non null/emtpy string', () => {
 
-    req = httpTestingController.expectOne('test');
-    req.flush(accountMock[0]);
-  }));
-
-  // describe('isNullOrWhitespace', () => {
-  //   it('should return true on null string', () => {
-
-  //     expect(component.isNullOrWhitespace(null)).toBeTrue();
-  //   });
-  //   it('should return true on empty string', () => {
-
-  //     expect(component.isNullOrWhitespace('')).toBeTrue();
-  //   });
-  //   it('should return true on string of spaces string', () => {
-
-  //     expect(component.isNullOrWhitespace('  ')).toBeTrue();
-  //   });
-  //   it('should return false on non null/emtpy string', () => {
-
-  //     expect(component.isNullOrWhitespace('null')).toBeFalse();
-  //   });
-  // });
+      expect(service.isNullOrWhitespace('null')).toBeFalse();
+    });
+  });
 });
