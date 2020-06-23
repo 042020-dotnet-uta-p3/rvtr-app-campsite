@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Booking } from 'src/app/data/booking.model';
-import { AccountService } from 'src/app/services/account/account.service';
-import { map } from 'rxjs/operators';
-import { LodgingService } from 'src/app/services/lodging/lodging.service';
-import { AccountBooking } from 'src/app/data/accountBooking';
 import { HttpParams } from '@angular/common/http';
-import { BookingService } from 'src/app/services/booking/booking.service';
+import { AccountService } from './../../../services/account/account.service';
+import { LodgingService } from './../../../services/lodging/lodging.service';
+import { AccountBooking } from './../../../data/accountBooking';
+import { BookingService } from './../../../services/booking/booking.service';
 
 @Component({
   selector: 'uic-display-bookings',
-  templateUrl: './display-bookings.component.html',
-  styleUrls: ['./display-bookings.component.scss']
+  templateUrl: './display-bookings.component.html'
 })
 export class DisplayBookingsComponent implements OnInit {
 

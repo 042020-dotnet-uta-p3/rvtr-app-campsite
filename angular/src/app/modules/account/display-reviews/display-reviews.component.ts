@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/app/services/account/account.service';
-import { map } from 'rxjs/operators';
-import { Review } from 'src/app/data/review.model';
-import { ReviewService } from 'src/app/services/lodging/review.service';
 import { HttpParams } from '@angular/common/http';
-import { LodgingService } from 'src/app/services/lodging/lodging.service';
+import { map } from 'rxjs/operators';
+import { Review } from './../../../data/review.model';
+import { AccountService } from './../../../services/account/account.service';
+import { ReviewService } from './../../../services/lodging/review.service';
+import { LodgingService } from './../../../services/lodging/lodging.service';
 
 @Component({
   selector: 'uic-display-reviews',
-  templateUrl: './display-reviews.component.html',
-  styleUrls: ['./display-reviews.component.scss']
+  templateUrl: './display-reviews.component.html'
 })
 export class DisplayReviewsComponent implements OnInit {
 

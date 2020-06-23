@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Profile } from 'src/app/data/profile.model';
-import { AccountService } from 'src/app/services/account/account.service';
 import { trigger, transition, animate, style } from '@angular/animations';
+import { Profile } from './../../../data/profile.model';
+import { AccountService } from './../../../services/account/account.service';
 
 @Component({
   selector: 'uic-edit-profile',
@@ -64,7 +64,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   // get profile inofrmation from the profile api
-  getProfiles(){
+  getProfiles() {
     this.accountService.getProfile(this.accountService.getUserId()).subscribe(
       profile => this.profiles = profile
     );
@@ -73,18 +73,19 @@ export class EditProfileComponent implements OnInit {
   // adds a new profile to the array of profiles in the data:Account property
   addProfile() {
     if (this.profiles.some(x => x.name.given === this.newProfile.name.given &&
-       x.name.family === this.newProfile.name.family) ||
+      x.name.family === this.newProfile.name.family) ||
       this.accountService.isNullOrWhitespace(this.newProfile.name.given) ||
       this.accountService.isNullOrWhitespace(this.newProfile.name.family) ||
       this.accountService.isNullOrWhitespace(this.newProfile.email) ||
       this.newProfile.phone.toString().length !== 10) {
-      return console.log('Error, please try again');
-    }
-    this.accountService.postProfile(this.newProfile).subscribe(profile => {
+      console.log('Error, please try again');
+    } else {
+      this.accountService.postProfile(this.newProfile).subscribe(profile => {
         this.getProfiles();
         this.toggleProfile();
       });
     }
+  }
 
   // remove a profile from array of profiles in the data:Account property
   removeProfile(profileId: number) {

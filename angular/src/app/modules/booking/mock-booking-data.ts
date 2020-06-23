@@ -4,7 +4,6 @@ import { Review } from './../../data/review.model';
 import { Location } from './../../data/location.model';
 import { RentalUnit } from './../../data/rental-unit.model';
 import { Booking } from './../../data/booking.model';
-import { Profile } from './../../data/profile.model';
 import { Stay } from './../../data/stay.model';
 import { BookingSearchData } from './@types/booking-search-data';
 import { FormControl } from '@angular/forms';
