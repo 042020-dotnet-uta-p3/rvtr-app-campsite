@@ -1,13 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { concatMap, map } from 'rxjs/operators';
 import { ConfigService } from '../config/config.service';
 import { Account } from '../../data/account.model';
 
 import * as _ from 'lodash';
-import { Payment } from 'src/app/data/payment.model';
-import { Profile } from 'src/app/data/profile.model';
+import { Payment } from './../../data/payment.model';
+import { Profile } from './../../data/profile.model';
 
 @Injectable({
   providedIn: 'root',
@@ -37,19 +37,19 @@ export class AccountService {
    */
   delete(id: string): Observable<boolean> {
     return this.accountUrl$.pipe(
-      concatMap((url) => this.http.delete<boolean>(url + '/' + id))
+      concatMap((url) => this.http.delete<boolean>(`${url}/${id}`))
     );
   }
 
   deletePayment(id: number): Observable<boolean> {
     return this.paymentUrl$.pipe(
-      concatMap((url) => this.http.delete<boolean>(url + '/' + id))
+      concatMap((url) => this.http.delete<boolean>(`${url}/${id}`))
     );
   }
 
   deleteProfile(id: number): Observable<boolean> {
     return this.profileUrl$.pipe(
-      concatMap((url) => this.http.delete<boolean>(url + '/' + id))
+      concatMap((url) => this.http.delete<boolean>(`${url}/${id}`))
     );
   }
 
