@@ -48,7 +48,6 @@ export class LodgingComponent implements OnInit {
     private readonly accountService: AccountService
   ) { }
 
-
   ngOnInit(): void {
     this.prefetchLodgings().subscribe(response => {
       this.processLodgeResponse(response);
@@ -125,9 +124,42 @@ export class LodgingComponent implements OnInit {
    * @param start index to start the slice
    * @param end index to end the slice
    */
-  renderLodgesFromCache(start: number, end: number): void {
-    this.lodgings = this.lodgingCache.slice(start, end);
-  }
+    renderLodgesFromCache(start: number, end: number): void {
+      //this.lodgings = this.lodgingCache.slice(start, end);
+      this.lodgings = [{
+        id: '0',
+        location: {
+          id: '1',
+          address: {
+            id: '1',
+            city: 'city',
+            country: 'country',
+            postalCode: 'postal code',
+            stateProvince: 'state',
+            street: 'street',
+            unit: '',
+          },
+          latitude: 0,
+          longitude: 1,
+          locale: 'locale',
+        },
+        name: 'name',
+        description: 'description',
+        rentals: null,
+        reviews: null,
+        amenities: null,
+        images: [
+          { id: '1', image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80' },
+          { id: '2', image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80' },
+          { id: '3', image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80' },
+          { id: '4', image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80' },
+          { id: '5', image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80' },
+          { id: '6', image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80' },
+
+        ]
+      }];
+    }
+ 
 
   /**
    * Updates the lodge cache, and sets appropriate indexing and pagination
