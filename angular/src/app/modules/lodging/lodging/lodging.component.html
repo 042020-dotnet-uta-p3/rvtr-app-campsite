@@ -12,34 +12,39 @@
       <div class="tile is-ancestor">
         <div class="tile is-6 is-parent is-vertical">
           <div class="tile is-child">
-            <figure class="image is-16by9">
+            <figure class="image is-5by3" *ngIf="0<lodge.images.Length; else altImage">
               <img alt="placeholder image" src="{{lodge.images[0].image}}">
             </figure>
+            <ng-template #altImage>
+            <figure class="image is-5by3">
+              <img alt="placeholder image" src="https://veraguarainforest.com/wp-content/uploads/2019/10/placeholder.png" />
+            </figure>
+              </ng-template>
           </div>
         </div>
         <div class="tile is-vertical">
           <div class="tile">
             <div class="tile is-parent is-vertical">
               <div class="tile is-child">
-                <figure class="image is-5by3">
+                <figure class="image is-5by3" *ngIf="1<lodge.images.Length; else altImage">
                   <img alt="placeholder image" src="{{lodge.images[1].image}}">
                 </figure>
               </div>
               <div class="tile is-child">
-                <figure class="image is-5by3">
+                <figure class="image is-5by3" *ngIf="2<lodge.images.Length; else altImage">
                   <img alt="placeholder image" src="{{lodge.images[2].image}}">
                 </figure>
               </div>
             </div>
             <div class="tile is-parent is-vertical">
               <div class="tile is-child">
-                <figure class="image is-5by3">
+                <figure class="image is-5by3" *ngIf="3<lodge.images.Length; else altImage">
                   <img alt="placeholder image" src="{{lodge.images[3].image}}">
                 </figure>
               </div>
 
               <div class="tile is-child">
-                <figure class="image is-5by3">
+                <figure class="image is-5by3" *ngIf="4<lodge.images.Length; else altImage">
                   <img alt="placeholder image" src="{{lodge.images[4].image}}">
                 </figure>
               </div>
@@ -47,13 +52,13 @@
 
             <div class="tile is-parent is-vertical">
               <div class="tile is-child">
-                <figure class="image is-5by3">
+                <figure class="image is-5by3" *ngIf="5<lodge.images.Length; else altImage">
                   <img alt="placeholder image" src="{{lodge.images[5].image}}">
                 </figure>
               </div>
 
               <div class="tile is-child">
-                <figure class="image is-5by3">
+                <figure class="image is-5by3" *ngIf="6<lodge.images.Length; else altImage">
                   <img alt="placeholder image" src="{{lodge.images[6].image}}">
                 </figure>
               </div>
