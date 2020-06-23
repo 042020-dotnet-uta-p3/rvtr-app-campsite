@@ -217,7 +217,7 @@ export class AccountService {
 
       // If the input file is greater than the maximum size, return an error message
       if (fileInput.target.files[0].size > maxSize) {
-        imageError = `Maximum size allowed is ${maxSize / 1000} + Mb`;
+        imageError = `Maximum size allowed is ${maxSize / 1000} Mb`;
         return { valid: false, message: imageError };
       }
 

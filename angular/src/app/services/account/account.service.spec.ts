@@ -22,6 +22,8 @@ describe('AccountService', () => {
     },
   ];
 
+  let imageFileMock: any;
+
   const configServiceStub = {
     get() {
       const config: Config = {
@@ -50,6 +52,7 @@ describe('AccountService', () => {
   let service: AccountService;
 
   beforeEach(() => {
+    imageFileMock = {};
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [{ provide: ConfigService, useValue: configServiceStub }],
@@ -143,7 +146,7 @@ describe('AccountService', () => {
     }));
   });
 
-  describe ('getPayment', () => {
+  describe('getPayment', () => {
     it('should make httpGet request', fakeAsync(() => {
       let req: TestRequest;
       service.getPayment('0').subscribe((res) => {
@@ -157,7 +160,7 @@ describe('AccountService', () => {
     }));
   });
 
-  describe ('getProfile', () => {
+  describe('getProfile', () => {
     it('should make httpGet request', fakeAsync(() => {
       let req: TestRequest;
       service.getProfile('0').subscribe((res) => {
@@ -232,7 +235,29 @@ describe('AccountService', () => {
   });
 
   describe('validateImage', () => {
-    
+    it('should not allow a file > 20971.52 Mb', () => {
+      imageFileMock = {
+        target: {
+          files: [{
+            size: 30971510
+          }]
+        }
+      };
+      const returnValue = service.validateImage(imageFileMock);
+      expect(returnValue.valid).toBeFalse();
+    });
+    it('should not allow non image files', () => {
+      imageFileMock = {
+        target: {
+          files: [{
+            size: 10971510,
+            type: 'text'
+          }]
+        }
+      };
+      const returnValue = service.validateImage(imageFileMock);
+      expect(returnValue.valid).toBeFalse();
+    });
   });
 
   describe('isValidCreditCard', () => {
