@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Account } from '../../../data/account.model';
-import { AccountService } from 'src/app/services/account/account.service';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AccountService } from './../../../services/account/account.service';
+import { Account } from '../../../data/account.model';
 
 @Component({
   selector: 'uic-edit-account',

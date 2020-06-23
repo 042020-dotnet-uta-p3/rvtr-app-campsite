@@ -1,12 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Payment } from 'src/app/data/payment.model';
-import { AccountService } from 'src/app/services/account/account.service';
+import { Component, OnInit } from '@angular/core';
 import { trigger, transition, animate, style } from '@angular/animations';
+import { Payment } from './../../../data/payment.model';
+import { AccountService } from './../../../services/account/account.service';
 
 @Component({
   selector: 'uic-edit-payment',
   templateUrl: './edit-payment.component.html',
-  styleUrls: ['./edit-payment.component.scss'],
   animations: [
     trigger('slideInOut', [
       transition(':enter', [
@@ -43,7 +42,7 @@ export class EditPaymentComponent implements OnInit {
     if (this.accountService.isNullOrWhitespace(this.newCard.cardName) ||
       today > this.newCard.cardExpirationDate ||
       !this.accountService.isValidCreditCard(this.newCard.cardNumber)) {
-      return console.log('Error, please try again');
+      console.log('Error, please try again');
     } else {
       this.accountService.postPayment(this.newCard).subscribe(payment => {
         this.getPayment();
