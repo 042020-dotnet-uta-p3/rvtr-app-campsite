@@ -93,7 +93,7 @@ describe('AccountService', () => {
       req.flush(JSON.stringify(true));
     }));
   });
-  
+
   describe('deleteProfile', () => {
     it('should make httpDelete request', fakeAsync(() => {
       let req: TestRequest;
@@ -170,7 +170,7 @@ describe('AccountService', () => {
       req.flush(accountMock);
     }));
   });
-  
+
   describe('post', () => {
     it('should make httpPost request', fakeAsync(() => {
       let req: TestRequest;
@@ -185,7 +185,7 @@ describe('AccountService', () => {
       req.flush(JSON.stringify(true));
     }));
   });
-  
+
   describe('postPayment', () => {
     it('should make httpPost request', fakeAsync(() => {
       let req: TestRequest;
@@ -200,7 +200,7 @@ describe('AccountService', () => {
       req.flush(JSON.stringify(true));
     }));
   });
-  
+
   describe('postProfile', () => {
     it('should make httpPost request', fakeAsync(() => {
       let req: TestRequest;
@@ -215,7 +215,7 @@ describe('AccountService', () => {
       req.flush(JSON.stringify(true));
     }));
   });
-  
+
   describe('put', () => {
     it('should make httpPut request', fakeAsync(() => {
       let req: TestRequest;
@@ -229,6 +229,37 @@ describe('AccountService', () => {
       req = httpTestingController.expectOne('accountTest');
       req.flush(accountMock[0]);
     }));
+  });
+
+  describe('validateImage', () => {
+    
+  });
+
+  describe('isValidCreditCard', () => {
+    it('should allow a valid Visa card number', () => {
+      const returnValue = service.isValidCreditCard('4325487844929025');
+      expect(returnValue).toBeTrue();
+    });
+    it('should allow a valid MC card number', () => {
+      const returnValue = service.isValidCreditCard('5474572265494504');
+      expect(returnValue).toBeTrue();
+    });
+    it('should allow a valid Discover card number', () => {
+      const returnValue = service.isValidCreditCard('6011742194273331');
+      expect(returnValue).toBeTrue();
+    });
+    it('should allow a valid AE card number', () => {
+      const returnValue = service.isValidCreditCard('342762285935732');
+      expect(returnValue).toBeTrue();
+    });
+    it('should not allow a card number > 16 digits', () => {
+      const returnValue = service.isValidCreditCard('11111111111111111');
+      expect(returnValue).toBeFalse();
+    });
+    it('should not allow a card number < 13 digits', () => {
+      const returnValue = service.isValidCreditCard('11111111');
+      expect(returnValue).toBeFalse();
+    });
   });
 
   describe('isNullOrWhitespace', () => {
