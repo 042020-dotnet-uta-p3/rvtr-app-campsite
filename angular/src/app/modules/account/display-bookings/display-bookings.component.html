@@ -6,7 +6,7 @@
   <div class="level-item">
     <figure class="image is-64x64">
       <img alt="placeholder image" class="is-rounded"
-        src="https://bulma.io/images/placeholders/128x128.png">
+      [src]="booking.lodging?.images?.length > 0 ? booking.lodging.images[0].image : 'https://bulma.io/images/placeholders/128x128.png'">
     </figure>
   </div>
 
@@ -14,7 +14,7 @@
   <div class="level-item has-text-centered">
     <div>
       <p class="heading">location</p>
-      <p class="title is-6" *ngIf="booking.lodging">{{booking.lodging.location.address.state}}</p>
+      <p class="title is-6" *ngIf="booking.lodging">{{booking.lodging.name}}</p>
     </div>
   </div>
 

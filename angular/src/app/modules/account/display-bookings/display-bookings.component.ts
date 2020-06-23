@@ -27,7 +27,7 @@ export class DisplayBookingsComponent implements OnInit {
      .subscribe(resultBookings => {
        this.bookings = resultBookings;
        this.bookings.forEach(booking =>
-         this.lodgingService.get(booking.lodgingId.toString())
+         this.lodgingService.get(booking.lodgingId.toString(), new HttpParams().set('IncludeImages', true.toString()))
                             .subscribe((lodging: any) =>
                                booking.lodging = lodging));
      });

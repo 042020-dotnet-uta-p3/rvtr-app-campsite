@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Review } from 'src/app/data/review.model';
 import { ReviewService } from 'src/app/services/lodging/review.service';
 import { HttpParams } from '@angular/common/http';
+import { LodgingService } from 'src/app/services/lodging/lodging.service';
 
 @Component({
   selector: 'uic-display-reviews',
@@ -22,11 +23,18 @@ export class DisplayReviewsComponent implements OnInit {
     const id: string = this.accountService.getUserId();
     this.reviewService.get(undefined, new HttpParams().set('AccoundId', id))
     .pipe(map(reviews => reviews.slice(0, 2)))
-    .subscribe(val => this.reviews = val);
+    .subscribe(val => {
+      this.reviews = val;
+      this.reviews.forEach(review =>
+        this.lodgingService.get(review.lodgingId.toString(), new HttpParams().set('IncludeImages', true.toString()))
+        .subscribe((lodging: any) =>
+        review.lodging = lodging));
+    });
   }
 
   constructor(private readonly accountService: AccountService,
-              private readonly reviewService: ReviewService
+              private readonly reviewService: ReviewService,
+              private readonly lodgingService: LodgingService
     ) { }
 
   ngOnInit(): void {
