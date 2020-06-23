@@ -8,53 +8,58 @@
     <div class="container" *ngFor="let lodge of lodgings">
       <br>
       <h1 class="title is-2">{{lodge.name}}</h1>
-      <!--IMAGES START-->
+        <!--IMAGES START-->
       <div class="tile is-ancestor">
         <div class="tile is-6 is-parent is-vertical">
           <div class="tile is-child">
-            <figure class="image is-16by9">
-              <img alt="placeholder image" src="{{lodge.images[0].image}}">
+            <figure class="image is-5by3" *ngIf="lodge.images && lodge.images.length > 0; else altImage">
+              <img alt="image" src="{{lodge.images[0].image}}">
             </figure>
+            <ng-template #altImage>
+              <figure class="image is-5by3">
+                <img alt="image" src="https://jayson.info/placeholder.png" />
+              </figure>
+            </ng-template>
           </div>
         </div>
         <div class="tile is-vertical">
           <div class="tile">
             <div class="tile is-parent is-vertical">
               <div class="tile is-child">
-                <figure class="image is-5by3">
-                  <img alt="placeholder image" src="{{lodge.images[1].image}}">
+                <figure class="image is-5by3" *ngIf="lodge.images && lodge.images.length > 1; else altImage">
+                  <img alt="image" src="{{lodge.images[1].image}}">
                 </figure>
               </div>
               <div class="tile is-child">
-                <figure class="image is-5by3">
-                  <img alt="placeholder image" src="{{lodge.images[2].image}}">
+                <figure class="image is-5by3" *ngIf="lodge.images && lodge.images.length > 2; else altImage">
+                  <img alt="image" src="{{lodge.images[2].image}}">
                 </figure>
               </div>
             </div>
             <div class="tile is-parent is-vertical">
               <div class="tile is-child">
-                <figure class="image is-5by3">
-                  <img alt="placeholder image" src="{{lodge.images[3].image}}">
+                <figure class="image is-5by3" *ngIf="lodge.images && lodge.images.length > 3; else altImage">
+                  <img alt="image" src="{{lodge.images[3].image}}">
                 </figure>
               </div>
 
               <div class="tile is-child">
-                <figure class="image is-5by3">
-                  <img alt="placeholder image" src="{{lodge.images[4].image}}">
+                <figure class="image is-5by3" *ngIf="lodge.images && lodge.images.length > 4; else altImage">
+                  <img alt="image" src="{{lodge.images[4].image}}">
                 </figure>
               </div>
             </div>
 
             <div class="tile is-parent is-vertical">
               <div class="tile is-child">
-                <figure class="image is-5by3">
-                  <img alt="placeholder image" src="{{lodge.images[5].image}}">
+                <figure class="image is-5by3" *ngIf="lodge.images && lodge.images.length > 5; else altImage">
+                  <img alt="image" src="{{lodge.images[5].image}}">
                 </figure>
               </div>
 
               <div class="tile is-child">
-                <figure class="image is-5by3">
-                  <img alt="placeholder image" src="{{lodge.images[6].image}}">
+                <figure class="image is-5by3" *ngIf="lodge.images && lodge.images.length > 6; else altImage">
+                  <img alt="image" src="{{lodge.images[6].image}}">
                 </figure>
               </div>
             </div>
