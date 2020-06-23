@@ -215,7 +215,7 @@ export class BookingModalComponent implements OnInit {
           },
           err => alert('Failed to create booking.'),
           () => {
-            console.log('HTTP Request completed.');
+            console.log('HTTP POST Request completed.');
             this.closeModal();
             this.bookingsChange.emit(this.bookingService.get());
           }
@@ -228,7 +228,7 @@ export class BookingModalComponent implements OnInit {
           },
           err => alert('Failed to update booking.'),
           () => {
-            console.log('HTTP Request completed.');
+            console.log('HTTP PUT Request completed.');
             this.closeModal();
             this.bookingsChange.emit(this.bookingService.get());
           }
