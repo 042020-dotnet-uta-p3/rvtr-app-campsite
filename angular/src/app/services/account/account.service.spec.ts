@@ -79,64 +79,6 @@ describe('AccountService', () => {
     }));
   });
 
-  describe('get', () => {
-
-    it('should get all accounts', fakeAsync(() => {
-      let req: TestRequest;
-      service.get().subscribe((res) => {
-        expect(res.length).toEqual(accountMock.length);
-      });
-
-      tick();
-
-      req = httpTestingController.expectOne('accountTest');
-      req.flush(accountMock);
-    }));
-
-    it('should get correct account id', fakeAsync(() => {
-      let reqOne: TestRequest;
-
-      service.get('0').subscribe((res) => {
-        expect(res[0].id).toEqual(accountMock[0].id);
-      });
-
-      tick();
-
-      reqOne = httpTestingController.expectOne('accountTest?id=0');
-      reqOne.flush(accountMock);
-    }));
-  });
-
-  describe('post', () => {
-    it('should make httpPost request', fakeAsync(() => {
-      let req: TestRequest;
-
-      service.post(accountMock[0]).subscribe((res) => {
-        expect(JSON.parse(res.toString())).toBeTrue();
-      });
-
-      tick();
-
-      req = httpTestingController.expectOne('accountTest');
-      req.flush(JSON.stringify(true));
-    }));
-  });
-
-  describe('put', () => {
-    it('should make httpPut request', fakeAsync(() => {
-      let req: TestRequest;
-
-      service.put(accountMock[0]).subscribe((res) => {
-        expect(res).toEqual(accountMock[0]);
-      });
-
-      tick();
-
-      req = httpTestingController.expectOne('accountTest');
-      req.flush(accountMock[0]);
-    }));
-  });
-
   describe('deletePayment', () => {
     it('should make httpDelete request', fakeAsync(() => {
       let req: TestRequest;
@@ -164,6 +106,128 @@ describe('AccountService', () => {
 
       req = httpTestingController.expectOne('profileTest/0');
       req.flush(JSON.stringify(true));
+    }));
+  });
+
+  describe('getUserId', () => {
+    it('should return userId', () => {
+      const id = service.getUserId();
+      expect(id).toBe('1');
+    });
+  });
+
+  describe('get', () => {
+    it('should get all accounts', fakeAsync(() => {
+      let req: TestRequest;
+      service.get().subscribe((res) => {
+        expect(res.length).toEqual(accountMock.length);
+      });
+
+      tick();
+
+      req = httpTestingController.expectOne('accountTest');
+      req.flush(accountMock);
+    }));
+
+    it('should get correct account id', fakeAsync(() => {
+      let reqOne: TestRequest;
+
+      service.get('0').subscribe((res) => {
+        expect(res[0].id).toEqual(accountMock[0].id);
+      });
+
+      tick();
+
+      reqOne = httpTestingController.expectOne('accountTest?id=0');
+      reqOne.flush(accountMock);
+    }));
+  });
+
+  describe ('getPayment', () => {
+    it('should make httpGet request', fakeAsync(() => {
+      let req: TestRequest;
+      service.getPayment('0').subscribe((res) => {
+        expect(res.length).toEqual(accountMock.length);
+      });
+
+      tick();
+
+      req = httpTestingController.expectOne('paymentTest?accountId=0');
+      req.flush(accountMock);
+    }));
+  });
+
+  describe ('getProfile', () => {
+    it('should make httpGet request', fakeAsync(() => {
+      let req: TestRequest;
+      service.getProfile('0').subscribe((res) => {
+        expect(res.length).toEqual(accountMock.length);
+      });
+
+      tick();
+
+      req = httpTestingController.expectOne('profileTest?accountId=0');
+      req.flush(accountMock);
+    }));
+  });
+  
+  describe('post', () => {
+    it('should make httpPost request', fakeAsync(() => {
+      let req: TestRequest;
+
+      service.post(accountMock[0]).subscribe((res) => {
+        expect(JSON.parse(res.toString())).toBeTrue();
+      });
+
+      tick();
+
+      req = httpTestingController.expectOne('accountTest');
+      req.flush(JSON.stringify(true));
+    }));
+  });
+  
+  describe('postPayment', () => {
+    it('should make httpPost request', fakeAsync(() => {
+      let req: TestRequest;
+
+      service.postPayment(null).subscribe((res) => {
+        expect(JSON.parse(res.toString())).toBeTrue();
+      });
+
+      tick();
+
+      req = httpTestingController.expectOne('paymentTest');
+      req.flush(JSON.stringify(true));
+    }));
+  });
+  
+  describe('postProfile', () => {
+    it('should make httpPost request', fakeAsync(() => {
+      let req: TestRequest;
+
+      service.postProfile(null).subscribe((res) => {
+        expect(JSON.parse(res.toString())).toBeTrue();
+      });
+
+      tick();
+
+      req = httpTestingController.expectOne('profileTest');
+      req.flush(JSON.stringify(true));
+    }));
+  });
+  
+  describe('put', () => {
+    it('should make httpPut request', fakeAsync(() => {
+      let req: TestRequest;
+
+      service.put(accountMock[0]).subscribe((res) => {
+        expect(res).toEqual(accountMock[0]);
+      });
+
+      tick();
+
+      req = httpTestingController.expectOne('accountTest');
+      req.flush(accountMock[0]);
     }));
   });
 
