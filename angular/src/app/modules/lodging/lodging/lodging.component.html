@@ -112,14 +112,27 @@
           </div>
         </div>
         <div class="tile">
-          <div class="tile is-parent">
+          <div class="tile is-parent" *ngIf="lodge.rentals && lodge.rentals.length > 0; else missing_rentals">
             <div class="tile box is-child" *ngFor="let rental of lodge.rentals.slice(0,1)">
               <h2 class="title is-4">Rooms</h2>
-              <uic-lodging-room [room]="rental.rentalUnit.bedrooms[0]"></uic-lodging-room>
+              <uic-lodging-room *ngIf="lodge.rentals.length > 0; else missing_room" [room]="rental.rentalUnit.bedrooms[0]"></uic-lodging-room>
               <hr>
-              <uic-lodging-room [room]="rental.rentalUnit.bedrooms[1]"></uic-lodging-room>
+              <uic-lodging-room *ngIf="lodge.rentals.length > 1" [room]="rental.rentalUnit.bedrooms[1]"></uic-lodging-room>
             </div>
           </div>
+          <ng-template #missing_room>Room information unavailable</ng-template>
+          <ng-template #missing_rentals>
+            <div class="tile is-parent">
+              <div class="tile box is-child">
+                <h2 class="title is-4">Rooms</h2>
+                  <div class="level">
+                    <div class="level-item">
+                      <h2>Room information unavailable</h2>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </ng-template>
 
           <div class="tile is-parent">
             <div (click)="reviewModal.openModal($event, lodge, account)" class="tile box is-child">
